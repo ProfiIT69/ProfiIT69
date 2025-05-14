@@ -1,7 +1,7 @@
 
  
  
- 
+ 01
  
   public Form1()
  {
@@ -96,3 +96,164 @@
          {
              MessageBox.Show("zkontroluj vstupní hodnoty");
          }
+
+
+
+
+
+
+
+
+------------
+02
+
+
+	 int pondeli, utery, streda, ctvrtek, patek, sobota, nedele;
+ int vyska, sirka;
+
+
+ private void textBox4_TextChanged(object sender, EventArgs e)
+ {
+     try
+     
+     {
+         ctvrtek = Convert.ToInt32(textBox4.Text);
+         if (ctvrtek < 0 || ctvrtek > 100)
+	 
+         {
+             MessageBox.Show("muzis zadat hodnotu mezi 0 az 100");
+         }
+	 
+         panel1.Refresh();
+     }
+     
+     catch { }
+ }
+
+
+
+   private void panel1_Paint(object sender, PaintEventArgs e)
+ {
+
+     vyska = panel1.Height;
+     sirka = panel1.Width / 7;
+     Graphics g = e.Graphics;
+     Brush brush = new SolidBrush(Color.Red);
+     Pen pen = new Pen(Color.IndianRed);
+
+     int[] hodnoty = { pondeli, utery, streda, ctvrtek, patek, sobota, nedele };
+     for (int i = 0; i < 7; i++)
+     {
+         int vyskaSloupce = (int)(vyska * (hodnoty[i] / 100.0));
+         g.FillRectangle(brush, i * sirka + 5, vyska - vyskaSloupce, sirka - 10, vyskaSloupce);
+     }
+
+
+ }
+
+
+
+---------
+03
+
+
+
+
+  public Form1()
+  {
+      InitializeComponent();
+  }
+
+  int vyskaPanelu = 400;
+  
+  int sirkaPanelu = 150;
+  
+  int aktualniVyska = 0;
+  
+  int krok = 0;
+  
+  int zmenaBarvyVyska = 0;
+  
+
+
+  private void panel1_Paint(object sender, PaintEventArgs e)
+  {
+
+  
+      Graphics g = e.Graphics;
+
+      // obrys sklenice
+      
+      g.DrawRectangle(Pens.Black, 10, 10, sirkaPanelu, vyskaPanelu);
+
+      // výběr barvy podle výšky
+      
+      Brush barva = Brushes.Green;
+      
+      if (aktualniVyska >= zmenaBarvyVyska)
+      
+          barva = Brushes.Orange;
+
+      g.FillRectangle(barva, 11, 10 + vyskaPanelu - aktualniVyska, sirkaPanelu - 1, aktualniVyska);
+  }
+  
+
+ private void button1_Click(object sender, EventArgs e)
+ {
+     try
+     {
+         int objemSklenice = Convert.ToInt32(textBox1.Text);
+	 
+         int objemKapky = Convert.ToInt32(textBox2.Text);
+	 
+         int interval = Convert.ToInt32(textBox3.Text);
+	 
+         int procentaZmeny = Convert.ToInt32(textBox4.Text);
+
+         krok = vyskaPanelu * objemKapky / objemSklenice;
+	 
+         zmenaBarvyVyska = vyskaPanelu * procentaZmeny / 100;
+
+         timer1.Interval = interval;
+	 
+         timer1.Start();
+     }
+     
+     catch
+     
+     {
+         MessageBox.Show("Zadej všechna čísla správně.");
+     }
+ }
+
+ private void timer1_Tick(object sender, EventArgs e)
+ {
+
+ 
+     if (aktualniVyska + krok <= vyskaPanelu)
+     
+     {
+         aktualniVyska += krok;
+	 
+         Refresh();
+     }
+     
+     else
+     
+     {
+         timer1.Stop();
+     }
+
+     Refresh();
+ }
+
+ private void button2_Click(object sender, EventArgs e)
+ 
+ {
+     aktualniVyska = 0;
+     
+     timer1.Stop();
+     
+     Refresh();
+ }
+  
