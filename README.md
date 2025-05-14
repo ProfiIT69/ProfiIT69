@@ -2,9 +2,14 @@
      {
          if (textBox1.Text != "" && textBox2.Text != "" && textBox3.Text != "" && textBox4.Text != "" && textBox5.Text != "" && textBox6.Text != "" && textBox7.Text != "")
 			// kontrola, zda jsou všechny vstupní údaje vyplněny
+
+
+   
          {
              int ObjednatK = (-1 * (AkStav - MinZas)) + (Spotreba * dny); // výpočet kusu na objednání
              if (ObjednatK < 0) // pokud by ObjednatK bylo menší než nula znamenáto že žádné další kusy nepotřebujem, proto zapišeme nulu
+
+      
          {
                  ObjednatK = 0;
              }
