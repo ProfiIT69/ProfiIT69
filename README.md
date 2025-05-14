@@ -24,14 +24,25 @@
  }
 
  private void textBox2_TextChanged(object sender, EventArgs e)
+
+
+ 
  {
      try
+
+     
          {
          AkStav = Convert.ToInt32(textBox2.Text);
+
+  
              if (AkStav <= 0) // podmínka, aby bylo možné do textboxu zapisovat pouze celé nezáporná čísla
+
+      
              {
                  textBox2.Text = "";
              }
+
+      
      }
      catch
          {
@@ -47,6 +58,7 @@
  try
      {
          if (textBox1.Text != "" && textBox2.Text != "" && textBox3.Text != "" && textBox4.Text != "" && textBox5.Text != "" && textBox6.Text != "" && textBox7.Text != "")
+	 
 			// kontrola, zda jsou všechny vstupní údaje vyplněny
 
 
